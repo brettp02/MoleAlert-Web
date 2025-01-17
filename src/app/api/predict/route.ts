@@ -1,10 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
+    const apiEndpoint = process.env.API_ENDPOINT as string;
     try {
         const formData = await request.formData();
 
-        const awsResponse = await fetch(process.env.API_ENDPOINT, {
+        const awsResponse = await fetch(apiEndpoint, {
             method: 'POST',
             body: formData
         });
