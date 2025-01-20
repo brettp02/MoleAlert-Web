@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import Github from "@/components/logos/github";
 import Link from "next/link";
 import {RegisterLink} from "@kinde-oss/kinde-auth-nextjs/components";
-import {Glow} from "@/components/ui/glow";
 
 export default function Hero() {
 
