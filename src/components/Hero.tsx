@@ -17,7 +17,6 @@ export default function Hero() {
                     <p className="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground delay-100 sm:text-xl">
                         Catching a malignant mole early can significantly reduce the risks.
                     </p>
-                    <div className="relative z-10 flex  justify-center gap-4">
                         <div className="relative z-10 flex  justify-center gap-4">
                             <RegisterLink>
                                 <Button variant="default" size="lg">
@@ -31,7 +30,6 @@ export default function Hero() {
                                 </Link>
                             </Button>
                         </div>
-                    </div>
                 </div>
             </div>
         </section>

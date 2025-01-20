@@ -10,9 +10,12 @@ import { Menu } from "lucide-react";
 import LaunchUI from "@/components/logos/launch-ui";
 import Link from "next/link";
 import {ModeToggle} from "@/components/ModeToggle";
-import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
+import {RegisterLink, LoginLink, LogoutLink} from "@kinde-oss/kinde-auth-nextjs/components";
+import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
+import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
+export default async function Navbar() {
+    const {isAuthenticated} = getKindeServerSession();
 
-export default function Navbar() {
     return (
         <header className="sticky top-0 z-50 -mb-4 px-4 pb-4">
             <div className="fade-bottom absolute left-0 h-24 w-full bg-background/15 backdrop-blur-lg"></div>
@@ -31,16 +34,24 @@ export default function Navbar() {
                     <NavbarRight>
                         <ModeToggle />
 
-                        <LoginLink>
-                            <Button variant={"ghost"} className="hidden text-sm md:block">
-                                Sign in
-                            </Button>
-                        </LoginLink>
-                        <RegisterLink>
-                            <Button variant="default">
-                                Get Started
-                            </Button>
-                        </RegisterLink>
+                        {(await isAuthenticated()) ? (
+                            <LogoutLink>
+                               <Button>Log out</Button>
+                            </LogoutLink>
+                        ): (
+                            <>
+                                <LoginLink>
+                                    <Button variant={"ghost"} className="hidden text-sm md:block">
+                                        Sign in
+                                    </Button>
+                                </LoginLink>
+                                <RegisterLink>
+                                    <Button variant="default">
+                                        Get Started
+                                    </Button>
+                                </RegisterLink>
+                            </>
+                        )}
                         <Sheet>
                             <SheetTrigger asChild>
                                 <Button
@@ -52,13 +63,16 @@ export default function Navbar() {
                                     <span className="sr-only">Toggle navigation menu</span>
                                 </Button>
                             </SheetTrigger>
+                            <VisuallyHidden>
+
+                            </VisuallyHidden>
                             <SheetContent side="right">
                                 <nav className="grid gap-6 text-lg font-medium">
                                     <Link
                                         href="/"
                                         className="flex items-center gap-2 text-xl font-bold"
                                     >
-                                        <span>Launch UI</span>
+                                        <span>Mole<span className="text-primary">Alert</span></span>
                                     </Link>
                                     <Link
                                         href="/"
