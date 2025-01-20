@@ -24,7 +24,7 @@ export function UserNav({name, email, image}: {name: string, email:string, image
                 <Button variant={"ghost"} className={"relative rounded-full h-10 w-10"}>
                     <Avatar className={"h-10 w-10 rounded-full"}>
                         <AvatarImage src={image} alt={"profile picture"}/>
-                        <AvatarFallback>User</AvatarFallback>
+                        <AvatarFallback>{name}</AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
