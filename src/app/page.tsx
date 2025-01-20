@@ -1,12 +1,12 @@
 import Hero from "@/components/Hero";
-import UploadFile from "@/components/UploadFile";
+{/*use UploadFile for predict*/}
 
 export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center h-[90vh] ">
       <Hero />
-        {/*<UploadFile />*/}
+
     </div>
   );
 }

@@ -10,15 +10,19 @@ import { Menu } from "lucide-react";
 import LaunchUI from "@/components/logos/launch-ui";
 import Link from "next/link";
 import {ModeToggle} from "@/components/ModeToggle";
-import {RegisterLink, LoginLink, LogoutLink} from "@kinde-oss/kinde-auth-nextjs/components";
+import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
 import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
+import {UserNav} from "@/components/UserNav";
+
 export default async function Navbar() {
-    const {isAuthenticated} = getKindeServerSession();
+    const {isAuthenticated, getUser} = getKindeServerSession();
+    const user = await getUser();
+
 
     return (
-        <header className="sticky top-0 z-50 -mb-4 px-4 pb-4">
-            <div className="fade-bottom absolute left-0 h-24 w-full bg-background/15 backdrop-blur-lg"></div>
+        <header className="top-0 z-50 -mb-4 px-4 border-b">
+            {/*<div className="fade-bottom absolute left-0 h-24 w-full bg-background/15 backdrop-blur-lg"></div>*/}
             <div className="relative mx-auto container">
                 <NavbarComponent>
                     <NavbarLeft>
@@ -35,9 +39,7 @@ export default async function Navbar() {
                         <ModeToggle />
 
                         {(await isAuthenticated()) ? (
-                            <LogoutLink>
-                               <Button>Log out</Button>
-                            </LogoutLink>
+                            <UserNav email={user?.email as string} image={user?.picture as string} name={user?.given_name as string}/>
                         ): (
                             <>
                                 <LoginLink>
