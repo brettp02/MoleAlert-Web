@@ -10,7 +10,7 @@ import { Menu } from "lucide-react";
 import LaunchUI from "@/components/logos/launch-ui";
 import Link from "next/link";
 import {ModeToggle} from "@/components/ModeToggle";
-
+import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function Navbar() {
     return (
@@ -30,12 +30,17 @@ export default function Navbar() {
                     </NavbarLeft>
                     <NavbarRight>
                         <ModeToggle />
-                        <Link href="/" className="hidden text-sm md:block">
-                            Sign in
-                        </Link>
-                        <Button variant="default" asChild>
-                            <Link href="/">Get Started</Link>
-                        </Button>
+
+                        <LoginLink>
+                            <Button variant={"ghost"} className="hidden text-sm md:block">
+                                Sign in
+                            </Button>
+                        </LoginLink>
+                        <RegisterLink>
+                            <Button variant="default">
+                                Get Started
+                            </Button>
+                        </RegisterLink>
                         <Sheet>
                             <SheetTrigger asChild>
                                 <Button

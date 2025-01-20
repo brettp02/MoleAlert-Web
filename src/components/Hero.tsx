@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Github from "@/components/logos/github";
 import Link from "next/link";
+import {RegisterLink} from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function Hero() {
 
@@ -18,9 +19,12 @@ export default function Hero() {
                     </p>
                     <div className="relative z-10 flex  justify-center gap-4">
                         <div className="relative z-10 flex  justify-center gap-4">
-                            <Button variant="default" size="lg" asChild>
-                                <Link href="/">Get Started</Link>
-                            </Button>
+                            <RegisterLink>
+                                <Button variant="default" size="lg">
+                                    Get Started
+                                </Button>
+                            </RegisterLink>
+
                             <Button variant="glow" size="lg" asChild>
                                 <Link href="/">
                                     <Github className="mr-2 h-4 w-4"/> Github

@@ -57,7 +57,7 @@ export default function UploadFile() {
     };
 
     return (
-        <main className="w-full min-h-screen m-auto flex flex-col justify-center items-center">
+        <main className="w-full m-auto flex flex-col justify-center items-center">
             <input
                 type="file"
                 onChange={handleChange}
