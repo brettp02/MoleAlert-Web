@@ -15,7 +15,7 @@ export default function Hero() {
                         Use AI to detect malignant moles
                     </h1>
                     <p className="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground delay-100 sm:text-xl">
-                        Catching a malignant mole early can significantly reduce the risks.
+                        Our computer vision model accurately classifies benign and malignant moles.
                     </p>
                         <div className="relative z-10 flex  justify-center gap-4">
                             <RegisterLink>

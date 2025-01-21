@@ -103,7 +103,7 @@ export default async function SettingsPage() {
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <SubmitButtons />
+                        <SubmitButtons init={"Save Now"} loading={"Saving..."}/>
                     </CardFooter>
                 </form>
             </Card>
