@@ -2,6 +2,7 @@ import React from 'react'
 import {Card, CardContent} from "@/components/ui/card";
 import {CheckCircle2} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import prisma from "@/app/lib/db";
 
 const featureItems = [
     {name: 'Testing Name'},
@@ -10,6 +11,10 @@ const featureItems = [
     {name: 'Testing Name'},
     {name: 'Testing Name'},
 ]
+
+async function getData(){
+    const data = await prisma
+}
 
 function BillingPage() {
     return (
