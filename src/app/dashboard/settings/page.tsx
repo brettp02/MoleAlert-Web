@@ -67,7 +67,7 @@ export default async function SettingsPage() {
                 <form action={postData}>
                     <CardHeader>
                         <CardTitle>General Data</CardTitle>
-                        <CardDescription>Please provide general information about yourself. Don't forget to save.</CardDescription>
+                        <CardDescription>Please provide general information about yourself. Don&apos;t forget to save.</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <div className={"space-y-2"}>
