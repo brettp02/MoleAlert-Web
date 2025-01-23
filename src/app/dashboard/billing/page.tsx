@@ -1,11 +1,12 @@
 import React from 'react'
-import {Card, CardContent} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {CheckCircle2} from "lucide-react";
 import prisma from "@/app/lib/db";
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
-import {getStripeSession} from "@/app/lib/stripe";
+import {getStripeSession, stripe} from "@/app/lib/stripe";
 import {redirect} from "next/navigation";
-import {StripeSubscriptionButton} from "@/components/SubmitButtons";
+import {StripePortal, StripeSubscriptionButton} from "@/components/SubmitButtons";
+import {Button} from "@/components/ui/button";
 
 const featureItems = [
     {name: 'Testing Name'},
@@ -64,6 +65,42 @@ export default async function BillingPage() {
         )
 
         return redirect(subscriptionUrl)
+    }
+
+    async function createCustomerPortal() {
+        "use server"
+
+        const session = await stripe.billingPortal.sessions.create({
+            customer: data?.user.stripeCustomerId as string,
+            return_url: "http://localhost:3000/dashboard",
+        });
+
+        return redirect(session.url)
+    }
+
+    if (data?.status === 'active') {
+        return (
+            <div className={"grid items-start gap-8"}>
+                <div className={"flex items-center justify-between px-2"}>
+                    <div className={"grid gap-1"}>
+                        <h1 className={"text-3xl md: text-4xl"}>Subscription</h1>
+                        <p className={"text-lg text-muted-foreground"}>Settings of your subscription</p>
+                    </div>
+                </div>
+
+                <Card className={"w-full lg:w-2/3"}>
+                    <CardHeader className={""}>
+                        <CardTitle>Edit Subscription</CardTitle>
+                        <CardDescription>Click the button below to change payment details and view your statement.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <form action={createCustomerPortal}>
+                            <StripePortal/>
+                        </form>
+                    </CardContent>
+                </Card>
+            </div>
+        )
     }
 
     return (

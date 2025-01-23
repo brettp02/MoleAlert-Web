@@ -5,6 +5,9 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import {useFormStatus} from "react-dom";
+import {Loader2} from "lucide-react";
 
 
 export default function UploadFile() {
@@ -116,7 +119,8 @@ export default function UploadFile() {
                         <Input type="file" onChange={handleChange} accept="image/*"/>
                     </div>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className={"flex items-center justify-between"}>
+                    <Button size={"lg"} variant={"destructive"}><Link href={"/dashboard"}>Cancel</Link></Button>
                     <Button size="lg" disabled={uploading} onClick={uploadFile}>Upload</Button>
                 </CardFooter>
             </Card>
@@ -156,5 +160,19 @@ function FileIcon(props) {
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
             <path d="M14 2v4a2 2 0 0 0 2 2h4" />
         </svg>
+    )
+}
+
+function SubmitButtons() {
+    const {pending} = useFormStatus()
+
+    return (
+        <>
+            {pending ? (
+                <Button disabled className={"w-fit"}><Loader2 className={"mr-2 w-4 h-4 animate-spin"}/>Classifying</Button>
+            ): (
+                <Button type={"submit"} className={"w-fit"}>Upload</Button>
+            )}
+        </>
     )
 }
