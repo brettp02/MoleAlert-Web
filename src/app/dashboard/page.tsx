@@ -8,6 +8,7 @@ import {Card} from "@/components/ui/card";
 import {revalidatePath} from "next/cache";
 import {DeleteButton} from "@/components/SubmitButtons";
 import {unstable_noStore as noStore} from "next/cache";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 
 async function getData(userId: string) {
     noStore();
@@ -71,17 +72,27 @@ export default async function Dashboard() {
                     {data.map((item) => {
                         return (
                             <Card key={item.id} className={"flex items-center justify-between p-4"}>
-                                <div>
-                                    <h2 className={"font-semibold text-xl text-primary"}>{item.title}</h2>
-                                    <p>{new Intl.DateTimeFormat('en-US', {
-                                        dateStyle: 'full'
-                                    }).format(new Date(item.createdAt))}</p>
-                                </div>
-
+                                <Accordion type="single" collapsible className={"flex flex-col w-full"}>
+                                    <div>
+                                        <h2 className={"font-semibold text-xl text-primary"}>{item.title}</h2>
+                                        <p>{new Intl.DateTimeFormat('en-US', {
+                                            dateStyle: 'full'
+                                        }).format(new Date(item.createdAt))}</p>
+                                    </div>
+                                    <AccordionItem value="item-1" className={'mr-2'}>
+                                        <AccordionTrigger></AccordionTrigger>
+                                        <AccordionContent>
+                                            <div>
+                                                <h2 className={"font-semibold text-lg"}>Prediction: <span className={"text-primary/90"}>{item.prediction}</span></h2>
+                                                <p className={"text-muted-foreground italic"}>{item.description}</p>
+                                            </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                </Accordion>
                                 <div className={"flex gap-x-4"}>
                                     <form action={deleteNote}>
                                         <input type={"hidden"} name={"id"} value={item.id}/>
-                                        <DeleteButton />
+                                        <DeleteButton/>
                                     </form>
                                 </div>
                             </Card>

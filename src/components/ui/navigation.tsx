@@ -12,45 +12,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "./navigation-menu";
-import LaunchUI from "../logos/launch-ui";
+import {ScanEye} from "lucide-react";
 
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
 
 export default function Navigation() {
   return (
@@ -66,46 +29,28 @@ export default function Navigation() {
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
-                    <LaunchUI />
+                    <ScanEye className={"text-primary/75"} />
                     <div className="mb-2 mt-4 text-lg font-medium">
-                      Launch UI
+                      MoleAlert
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Landing page template built with React, Shadcn/ui and
-                      Tailwind that you can copy/paste into your project.
+                      MoleAlert uses computer vision to detect malignant melanoma early. It has a high classification accuracy of ~90%, but is NOT intended to be a substitute for professional medical advice.
                     </p>
                   </Link>
                 </NavigationMenuLink>
               </li>
               <ListItem href="/" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
+                Simply take a photo of your mole, and press upload to receive the classification. You can press save to keep track of a bothersome mole over time.
               </ListItem>
-              <ListItem href="/" title="Installation">
-                How to install dependencies and structure your app.
+              <ListItem href="/" title="Why use?">
+                Survival rate for early melanoma is extremely high (99-100%).
               </ListItem>
-              <ListItem href="/" title="Typography">
-                Styles for headings, paragraphs, lists...etc
+              <ListItem href="/" title="Disclaimer">
+                MoleAlert can produce false positives and negatives.
               </ListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href="/"
-                >
-                  {component.description}
-                </ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
       </NavigationMenuList>
     </NavigationMenu>
   );
