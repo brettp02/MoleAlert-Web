@@ -3,13 +3,15 @@ import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import prisma from "@/app/lib/db";
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
-import { File, Trash} from "lucide-react";
+import { File } from "lucide-react";
 import {Card} from "@/components/ui/card";
 import {revalidatePath} from "next/cache";
 import {DeleteButton} from "@/components/SubmitButtons";
+import {unstable_noStore as noStore} from "next/cache";
 
 async function getData(userId: string) {
-    const data = await prisma.note.findMany({
+    noStore();
+     const data = await prisma.note.findMany({
         where: {
             userId: userId
         },
@@ -19,6 +21,7 @@ async function getData(userId: string) {
     })
 
     return data
+
 }
 
 export default async function Dashboard() {
@@ -52,7 +55,7 @@ export default async function Dashboard() {
                 </Button>
             </div>
 
-            {data.length < 1 ? (
+            {data?.length < 1 ? (
                 <div className={"flex min-h-[400px] flex-col items-center justify-center rounded-md border border-dashed p-8 text-center animate-in fade-in-50"}>
                     <div className={"flex h-20 w-20 items-center justify-center rounded-full bg-primary/10"}>
                         <File className={"w-10 h-10 text-primary"}></File>

@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import  Navbar  from "@/components/NavBar"
 import prisma from "@/app/lib/db";
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
+import {unstable_noStore as noStore} from "next/cache";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 async function getData(userId: string) {
+    noStore();
     if (userId) {
         const data = await prisma.user.findUnique({
             where: {
