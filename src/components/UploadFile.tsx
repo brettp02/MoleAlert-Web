@@ -6,11 +6,13 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
-import {useFormStatus} from "react-dom";
-import {Loader2} from "lucide-react";
 
 
-export default function UploadFile() {
+interface UploadFileProps {
+    onPredictionComplete?: (prediction: string) => void;
+}
+
+export default function UploadFile({ onPredictionComplete }: UploadFileProps) {
     const [file, setFile] = useState<File>();
     const [uploading, setUploading] = useState(false);
     const [prediction, setPrediction] = useState<string>("");
@@ -43,6 +45,11 @@ export default function UploadFile() {
             const result = await response.json();
             console.log('Prediction Result:', result);
             setPrediction(result.result);
+            
+            // Call the callback with the prediction
+            if (onPredictionComplete) {
+                onPredictionComplete(result.result);
+            }
 
         } catch (e) {
             console.error('Error:', e);
@@ -120,7 +127,6 @@ export default function UploadFile() {
                     </div>
                 </CardContent>
                 <CardFooter className={"flex items-center justify-between"}>
-                    <Button size={"lg"} variant={"destructive"}><Link href={"/dashboard"}>Cancel</Link></Button>
                     <Button size="lg" disabled={uploading} onClick={uploadFile}>Upload</Button>
                 </CardFooter>
             </Card>
@@ -163,16 +169,3 @@ function FileIcon(props) {
     )
 }
 
-function SubmitButtons() {
-    const {pending} = useFormStatus()
-
-    return (
-        <>
-            {pending ? (
-                <Button disabled className={"w-fit"}><Loader2 className={"mr-2 w-4 h-4 animate-spin"}/>Classifying</Button>
-            ): (
-                <Button type={"submit"} className={"w-fit"}>Upload</Button>
-            )}
-        </>
-    )
-}
