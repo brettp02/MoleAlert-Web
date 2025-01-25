@@ -25,7 +25,7 @@ export default function Hero() {
                             </RegisterLink>
 
                             <Button variant="glow" size="lg" asChild>
-                                <Link href="/">
+                                <Link href="https://github.com/brettp02/MoleAlert-Web">
                                     <Github className="mr-2 h-4 w-4"/> Github
                                 </Link>
                             </Button>
