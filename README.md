@@ -1,36 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mole Alert
 
-## Getting Started
+MoleAlert is a web app that accuractely classifies benign and malignant moles. It communicates with a [FastAPI-based REST API](https://github.com/brettp02/MoleAlert-Backend). Which uses computer vision in the form of a Resnet50 model which is trained using transfer learning, containerized with Docker and hosted on AWS. The web app uses Next.js 15, tailwind css, shadcn ui, Kinde for auth, Supabase and Prisma for database management and Stripe for payment management. *Note: payment is not currently enforced, and Stripe is in test mode*
 
-First, run the development server:
+### Landing Page
+![Landing Page](/public/Landing.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Dashboard
+![Dashboard Page](/public/Main.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Accuracy
+The AI model has a training accuracy of ~85-90%, which means that predictions are quite accurate. However, there are possibilities for false positives and false negatives. To avoid this ensure your images are high quality, many phones now have a macro lens feature which would give the most accurate results.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### *Disclaimer*
+*MoleAlert is not intended to be used as a substitute advice from medical professionals. This is a portfolio project on practising deploying AI models and developing full stack web applications.*
